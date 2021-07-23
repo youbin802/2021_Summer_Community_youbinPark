@@ -16,7 +16,7 @@
     </head>
     <body>
         <div id="app">
-          <!-- 회원가입 입력 폼 -->
+            <!-- 회원가입 입력 폼 -->
             <p style="border:1px solid #777; padding:10px; text-align:center;">학생</p>
             <div class="mb-3 row">
                 <label for="name" class="col-sm-2 col-form-label">이름</label>
@@ -45,13 +45,13 @@
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="pwd" v-model:value="pwd">
+                    <input type="text" class="form-control" id="pwd" v-model:value="pwd">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호 확인</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="pwdCh" v-model:value="pwdCh">
+                    <input type="text" class="form-control" id="pwdCh" v-model:value="pwdCh">
                 </div>
             </div>
             <!-- 학과 선택 (과,학년,반,번호) -->
@@ -81,7 +81,6 @@
                 v-model='number'
                 class="select-input"
                 style="width:100px;"
-                oninput="maxLengthCheck(this)"
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
             <input type="submit" value="회원가입 하기" id="submit" v-on:click="Submit">
@@ -101,46 +100,54 @@
                     email: '',
                     id: 'id입력',
                     email: 'email입력',
-                    pwd: '',
+                    pwd: 'password 입력',
                     pwdCh: ''
                 },
                 computed: {
-                  /* 자신이 선택한 값 확인해주는 text */
+                    /* 자신이 선택한 값 확인해주는 text */
                     checkText() {
                         const {department, grade, classNum, number} = this;
                         return `${department}과 ${grade}학년 ${classNum}반 번호 : ${number}`;
                     }
                 },
                 methods: {
-                  /* 회원가입 입력 값 체크 */
+                    /* 회원가입 입력 값 체크 */
                     Submit() {
                         const {name, email, id, pwd, pwdCh} = this;
                         let ch = /^[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]+$/;
                         let ch2 = /^[a-zA-Z0-9가-힣]+$/;
 
-                        if (name == "" || email == "" || id == "" || pwd == "" || pwdCh == "") 
+                        if (name == "" || email == "" || id == "" || pwd == "" || pwdCh == "") {
                             alert('비어있음');
-                        
-                        if (ch.test(name)) 
-                            alert('이름은 한글만 가능');
-                        
-                        if (!ch2.test(id)) 
-                            alert('아이디는 영문자, 특수문자, 숫자만 가능');
-                        
-                        if (pwd.length > 4) 
-                            alert('비밀번호는 4자 이상');
-                        
-                        if (pwd != pwdCh) 
-                            alert('비밀번호 확인과 틀림');
+                        } else {
+
+                            if (ch.test(name)) 
+                                alert('이름은 한글만 가능');
+                            
+                            if (!ch2.test(id)) 
+                                alert('아이디는 영문자, 특수문자, 숫자만 가능');
+                            
+                            if (pwd.length > 4) 
+                                alert('비밀번호는 4자 이상');
+                            
+                            if (!ch2.test(pwd)) 
+                                alert('비밀번호는 영문자, 특수문자, 숫자만 가능');
+                            
+                            if (pwd != pwdCh) 
+                                alert('비밀번호 확인과 틀림');
+                            }
                         }
-                    }
+
+                }
             });
 
             /* 번호 입력 시 2자리까지만 가능하게 하는 함수 */
             function maxLengthCheck(ob) {
-              if (ob.value.length > 2) {
-                ob.value= ob.value.slice(0,2);
-              }
+                if (ob.value.length > 2) {
+                    ob.value = ob
+                        .value
+                        .slice(0, 2);
+                }
             }
         </script>
     </body>

@@ -6,19 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>신분 선택 페이지</title>
         <script src="/js/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="/css/app.css">
         <style>
             button {
                 width: 100px;
                 height: 100px;
             }
+
+            #app {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
         </style>
     </head>
     <body>
-        신분을 선택해주세요
-        <br>
-        <button value='1'>학생</button>
-        <button value='2'>교사</button>
-
+        <div id="app">
+            <p>신분을 선택해주세요</p>
+            <br>
+            <btn-group>
+                <button value='1'>학생</button>
+                <button value='2'>교사</button>
+            </btn-group>
+        </div>
         <script>
             const log = console.log;
             /* 신분에 맞는 페이지 이동 */
